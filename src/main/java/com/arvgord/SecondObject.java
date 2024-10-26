@@ -3,6 +3,8 @@ package com.arvgord;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -13,18 +15,23 @@ import java.util.Map;
 )
 public class SecondObject {
 
+    private final String transactionId;
     @JsonAnySetter
     @JsonAnyGetter
-    private Map<String, Object> data = new LinkedHashMap<>();
-    private String transactionId;
+    private final Map<String, Object>  data;
 
-    public SecondObject() {}
 
-    SecondObject(String transactionId) {
+    @JsonCreator
+    public SecondObject(@JsonProperty("transactionId") String transactionId) {
         this.transactionId = transactionId;
+        this.data = new LinkedHashMap<>();
     }
 
     public String getTransactionId() {
-        return transactionId;
+        return this.transactionId;
+    }
+
+    public Map<String, Object> getData() {
+        return this.data;
     }
 }
