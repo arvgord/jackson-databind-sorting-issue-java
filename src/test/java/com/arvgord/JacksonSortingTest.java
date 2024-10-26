@@ -31,7 +31,7 @@ public class JacksonSortingTest {
         }
     """;
 
-    private final String SECOND_JSON_OUTPUT = """
+    private final String SECOND_UNEXPECTED_SORTING_JSON_OUTPUT = """
         {
             "transactionId": "test",
             "a": 1,
@@ -53,7 +53,7 @@ public class JacksonSortingTest {
         }
     """;
 
-    private final String THIRD_JSON_OUTPUT = """
+    private final String THIRD_UNEXPECTED_SORTING_JSON_OUTPUT = """
         {
             "transactionId": "test",
             "c": [
@@ -92,11 +92,11 @@ public class JacksonSortingTest {
 
     @Test
     public void testSerializationAndDeserializationForSecondObject() throws Exception {
-        testSerializationDeserialization(SECOND_JSON_OUTPUT, SecondObject.class);
+        testSerializationDeserialization(SECOND_UNEXPECTED_SORTING_JSON_OUTPUT, SecondObject.class);
     }
 
     @Test
     public void testSerializationAndDeserializationForThirdObject() throws Exception {
-        testSerializationDeserialization(THIRD_JSON_OUTPUT, ThirdObject.class);
+        testSerializationDeserialization(THIRD_UNEXPECTED_SORTING_JSON_OUTPUT, ThirdObject.class);
     }
 }
