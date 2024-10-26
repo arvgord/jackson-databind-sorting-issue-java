@@ -9,7 +9,7 @@ public class JacksonSortingTest {
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
-    private final String JSON_INPUT = """
+    private final String INPUT_JSON = """
         {
             "b": 2,
             "a": 1,
@@ -31,7 +31,7 @@ public class JacksonSortingTest {
         }
     """;
 
-    private final String JSON_OUTPUT_SECOND = """
+    private final String SECOND_JSON_OUTPUT = """
         {
             "transactionId": "test",
             "a": 1,
@@ -53,7 +53,7 @@ public class JacksonSortingTest {
         }
     """;
 
-    private final String JSON_OUTPUT_THIRD = """
+    private final String THIRD_JSON_OUTPUT = """
         {
             "transactionId": "test",
             "c": [
@@ -75,11 +75,11 @@ public class JacksonSortingTest {
         }
     """;
 
-    private <T> void testSerializationDeserialization(String resultOutput, Class<T> clazz) throws Exception {
-        T deserializedObject = objectMapper.readValue(JSON_INPUT, clazz);
+    private <T> void testSerializationDeserialization(String outputResult, Class<T> clazz) throws Exception {
+        T deserializedObject = objectMapper.readValue(INPUT_JSON, clazz);
         String serializedJson = objectMapper.writeValueAsString(deserializedObject);
 
-        String expectedJson = objectMapper.readTree(resultOutput).toPrettyString();
+        String expectedJson = objectMapper.readTree(outputResult).toPrettyString();
         String actualJson = objectMapper.readTree(serializedJson).toPrettyString();
 
         assertEquals(expectedJson, actualJson);
@@ -87,16 +87,16 @@ public class JacksonSortingTest {
 
     @Test
     public void testSerializationAndDeserializationForFirstObject() throws Exception {
-        testSerializationDeserialization(JSON_INPUT, FirstObject.class);
+        testSerializationDeserialization(INPUT_JSON, FirstObject.class);
     }
 
     @Test
     public void testSerializationAndDeserializationForSecondObject() throws Exception {
-        testSerializationDeserialization(JSON_OUTPUT_SECOND, SecondObject.class);
+        testSerializationDeserialization(SECOND_JSON_OUTPUT, SecondObject.class);
     }
 
     @Test
     public void testSerializationAndDeserializationForThirdObject() throws Exception {
-        testSerializationDeserialization(JSON_OUTPUT_THIRD, ThirdObject.class);
+        testSerializationDeserialization(THIRD_JSON_OUTPUT, ThirdObject.class);
     }
 }
