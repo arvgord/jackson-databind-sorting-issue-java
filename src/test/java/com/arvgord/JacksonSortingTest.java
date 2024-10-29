@@ -55,4 +55,9 @@ public class JacksonSortingTest {
     public void testSerializationAndDeserializationForThirdObject() throws Exception {
         testSerializationDeserialization(ThirdObject.class);
     }
+
+    @Test
+    public void testSerializationAndDeserializationForFourthObject() throws Exception {
+        testSerializationDeserialization(FourthObject.class);
+    }
 }
